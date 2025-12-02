@@ -24,7 +24,7 @@ class Dbrowse < Formula
     
     # Install requirements from requirements.txt
     requirements = buildpath/"requirements.txt"
-    venv.pip_install requirements if requirements.exist?
+    venv.pip_install "-r", requirements if requirements.exist?
     
     # Install the package itself
     venv.pip_install_and_link buildpath
