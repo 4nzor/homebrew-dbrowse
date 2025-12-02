@@ -8,6 +8,8 @@
 #   brew install dbrowse
 
 class Dbrowse < Formula
+  include Language::Python::Virtualenv
+
   desc "Terminal-based database management utility (TUI) for multiple database types"
   homepage "https://github.com/4nzor/dbrowse"
   url "https://github.com/4nzor/dbrowse/archive/refs/tags/v0.1.0.tar.gz"
@@ -18,14 +20,13 @@ class Dbrowse < Formula
   depends_on "python@3.10"
 
   def install
-    python3 = "python3.10"
-    venv = virtualenv_create(libexec, python3)
+    venv = virtualenv_create(libexec, "python3.10")
     
-    # Install requirements first
+    # Install requirements from requirements.txt
     requirements = buildpath/"requirements.txt"
-    venv.pip_install requirements.read if requirements.exist?
+    venv.pip_install requirements if requirements.exist?
     
-    # Install the package
+    # Install the package itself
     venv.pip_install_and_link buildpath
   end
 
@@ -34,4 +35,3 @@ class Dbrowse < Formula
     system "#{bin}/dbrowse", "--help"
   end
 end
-
