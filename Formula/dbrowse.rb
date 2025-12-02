@@ -20,7 +20,7 @@ class Dbrowse < Formula
   depends_on "python@3.10"
 
   def install
-    venv = virtualenv_create(libexec, "python3.10")
+    venv = virtualenv_create(libexec)
     
     # Install requirements from requirements.txt
     requirements = buildpath/"requirements.txt"
